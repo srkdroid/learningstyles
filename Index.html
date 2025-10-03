@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Skills Self-Assessment</title>
+    <style>
+        :root {
+            --primary-color: #005a9c;
+            --secondary-color: #f0f8ff;
+            --text-color: #333;
+            --border-color: #ddd;
+            --shadow-color: rgba(0,0,0,0.1);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+        }
+        h1, h2, h3 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .questionnaire {
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            background-color: var(--secondary-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+        .question {
+            margin-bottom: 1.5rem;
+        }
+        .question p {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .question label {
+            display: block;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+        }
+        .question label:hover {
+            background-color: #e6f2ff;
+        }
+        .question input[type="radio"] {
+            margin-right: 10px;
+        }
+        .likert-question {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+       .likert-question:last-child {
+            border-bottom: none;
+       }
+        .likert-options {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+        .likert-options label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px;
+        }
+        .likert-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 5px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #fff;
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #004170;
+        }
+        #results {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: #fafff0;
+            border: 1px solid #d4e8c1;
+            border-radius: 8px;
+        }
+        .result-block {
+            margin-bottom: 1.5rem;
+        }
+        .result-block h3 {
+            border-bottom: none;
+            margin-bottom: 0.5rem;
+        }
+        .result-block ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .result-block li {
+            padding: 5px 0;
+        }
+        .score {
+            font-weight: bold;
+        }
+        #emailSection {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: var(--secondary-color);
+            border-radius: 8px;
+        }
+        #emailSection input[type="email"] {
+            width: calc(100% - 24px);
+            padding: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+        }
+        #emailSection button {
+            background-color: #28a745;
+        }
+        #emailSection button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Learning Skills Self-Assessment</h1>
+        <p>This questionnaire is a tool for self-awareness. Answer honestly based on your natural habits and preferences to gain insight into your learning style. There are no right or wrong answers.</p>
+
+        <form id="assessmentForm">
+
+            <div class="questionnaire">
+                <h2>🎨 Part 1: VARK-Inspired Questions</h2>
+                <div class="question">
+                    <p>1. When trying to understand a new idea, I usually prefer:</p>
+                    <label><input type="radio" name="vark1" value="a" required> A diagram, flowchart, or picture.</label>
+                    <label><input type="radio" name="vark1" value="b"> Someone explaining it out loud.</label>
+                    <label><input type="radio" name="vark1" value="c"> A detailed text or notes.</label>
+                    <label><input type="radio" name="vark1" value="d"> A hands-on demonstration or activity.</label>
+                </div>
+                <div class="question">
+                    <p>2. When remembering directions, I rely most on:</p>
+                    <label><input type="radio" name="vark2" value="a" required> A map.</label>
+                    <label><input type="radio" name="vark2" value="b"> Verbal instructions.</label>
+                    <label><input type="radio" name="vark2" value="c"> Written steps.</label>
+                    <label><input type="radio" name="vark2" value="d"> Physically tracing the route or walking it.</label>
+                </div>
+                 <div class="question">
+                    <p>3. In a classroom, I feel most engaged when:</p>
+                    <label><input type="radio" name="vark3" value="a" required> The teacher uses visuals or charts.</label>
+                    <label><input type="radio" name="vark3" value="b"> There are discussions or oral explanations.</label>
+                    <label><input type="radio" name="vark3" value="c"> Handouts or notes are provided.</label>
+                    <label><input type="radio" name="vark3" value="d"> I get to try or simulate the process myself.</label>
+                </div>
+                <div class="question">
+                    <p>4. To recall a formula or definition, I…</p>
+                    <label><input type="radio" name="vark4" value="a" required> Picture it in my head.</label>
+                    <label><input type="radio" name="vark4" value="b"> Say it out loud.</label>
+                    <label><input type="radio" name="vark4" value="c"> Write it down.</label>
+                    <label><input type="radio" name="vark4" value="d"> Apply it in a practical problem.</label>
+                </div>
+                <div class="question">
+                    <p>5. When learning a new skill (like cooking or fixing something), I prefer:</p>
+                    <label><input type="radio" name="vark5" value="a" required> Watching a video or illustration.</label>
+                    <label><input type="radio" name="vark5" value="b"> Listening to instructions.</label>
+                    <label><input type="radio" name="vark5" value="c"> Reading the manual.</label>
+                    <label><input type="radio" name="vark5" value="d"> Jumping in and trying it out.</label>
+                </div>
+                <div class="question">
+                    <p>6. When studying, I often…</p>
+                    <label><input type="radio" name="vark6" value="a" required> Draw diagrams or mind maps.</label>
+                    <label><input type="radio" name="vark6" value="b"> Record and listen to summaries.</label>
+                    <label><input type="radio" name="vark6" value="c"> Rewrite notes neatly.</label>
+                    <label><input type="radio" name="vark6" value="d"> Build models or do practice exercises.</label>
+                </div>
+                <div class="question">
+                    <p>7. If given a choice of study material, I would pick:</p>
+                    <label><input type="radio" name="vark7" value="a" required> An infographic or visual guide.</label>
+                    <label><input type="radio" name="vark7" value="b"> A podcast or lecture recording.</label>
+                    <label><input type="radio" name="vark7" value="c"> A textbook or article.</label>
+                    <label><input type="radio" name="vark7" value="d"> A lab kit or case study simulation.</label>
+                </div>
+                <div class="question">
+                    <p>8. I find I remember best when I…</p>
+                    <label><input type="radio" name="vark8" value="a" required> See things represented visually.</label>
+                    <label><input type="radio" name="vark8" value="b"> Talk through ideas with someone.</label>
+                    <label><input type="radio" name="vark8" value="c"> Read and re-read the material.</label>
+                    <label><input type="radio" name="vark8" value="d"> Move, act, or experiment.</label>
+                </div>
+                <div class="question">
+                    <p>9. When learning history, I’d prefer:</p>
+                    <label><input type="radio" name="vark9" value="a" required> A timeline or historical map.</label>
+                    <label><input type="radio" name="vark9" value="b"> A narrated story or documentary.</label>
+                    <label><input type="radio" name="vark9" value="c"> A written biography or textbook.</label>
+                    <label><input type="radio" name="vark9" value="d"> A role-play or reenactment.</label>
+                </div>
+                <div class="question">
+                    <p>10. To prepare for an exam, I usually:</p>
+                    <label><input type="radio" name="vark10" value="a" required> Use flashcards with images.</label>
+                    <label><input type="radio" name="vark10" value="b"> Record myself explaining and replay.</label>
+                    <label><input type="radio" name="vark10" value="c"> Make summaries and lists.</label>
+                    <label><input type="radio" name="vark10" value="d"> Do practical problems or mock tests.</label>
+                </div>
+            </div>
+
+            <div class="questionnaire">
+                <h2>🔄 Part 2: Kolb-Inspired Questions</h2>
+                <div class="question">
+                    <p>1. When learning something new, I prefer to…</p>
+                    <label><input type="radio" name="kolb1" value="a" required> Jump into a real experience (CE).</label>
+                    <label><input type="radio" name="kolb1" value="b"> Watch and reflect first (RO).</label>
+                    <label><input type="radio" name="kolb1" value="c"> Understand the underlying theory (AC).</label>
+                    <label><input type="radio" name="kolb1" value="d"> Test it out in different ways (AE).</label>
+                </div>
+                <div class="question">
+                    <p>2. In group projects, my natural role is…</p>
+                    <label><input type="radio" name="kolb2" value="a" required> The doer — I want to try things out (CE).</label>
+                    <label><input type="radio" name="kolb2" value="b"> The observer — I like to watch how others approach it (RO).</label>
+                    <label><input type="radio" name="kolb2" value="c"> The planner — I like organizing based on concepts (AC).</label>
+                    <label><input type="radio" name="kolb2" value="d"> The experimenter — I test solutions quickly (AE).</label>
+                </div>
+                <div class="question">
+                    <p>3. I learn best from…</p>
+                    <label><input type="radio" name="kolb3" value="a" required> Direct hands-on experience (CE).</label>
+                    <label><input type="radio" name="kolb3" value="b"> Carefully thinking back on what happened (RO).</label>
+                    <label><input type="radio" name="kolb3" value="c"> Logical explanations and models (AC).</label>
+                    <label><input type="radio" name="kolb3" value="d"> Trying new approaches to see what works (AE).</label>
+                </div>
+                <div class="question">
+                    <p>4. In a science lab, I…</p>
+                    <label><input type="radio" name="kolb4" value="a" required> Enjoy handling equipment (CE).</label>
+                    <label><input type="radio" name="kolb4" value="b"> Like analyzing observations after the experiment (RO).</label>
+                    <label><input type="radio" name="kolb4" value="c"> Focus on the theory behind it (AC).</label>
+                    <label><input type="radio" name="kolb4" value="d"> Tweak the procedure to see new outcomes (AE).</label>
+                </div>
+                <div class="question">
+                    <p>5. When facing a new challenge, my instinct is to…</p>
+                    <label><input type="radio" name="kolb5" value="a" required> Experience it directly (CE).</label>
+                    <label><input type="radio" name="kolb5" value="b"> Pause and think it through (RO).</label>
+                    <label><input type="radio" name="kolb5" value="c"> Search for concepts or frameworks (AC).</label>
+                    <label><input type="radio" name="kolb5" value="d"> Try multiple approaches until something works (AE).</label>
+                </div>
+                <div class="question">
+                    <p>6. I enjoy assignments where I…</p>
+                    <label><input type="radio" name="kolb6" value="a" required> Role-play or simulate real-life situations (CE).</label>
+                    <label><input type="radio" name="kolb6" value="b"> Write reflective journals or discuss (RO).</label>
+                    <label><input type="radio" name="kolb6" value="c"> Work on structured essays or models (AC).</label>
+                    <label><input type="radio" name="kolb6" value="d"> Do practical projects or prototypes (AE).</label>
+                </div>
+                <div class="question">
+                    <p>7. When learning from mistakes, I usually…</p>
+                    <label><input type="radio" name="kolb7" value="a" required> Remember how it felt and what I did (CE).</label>
+                    <label><input type="radio" name="kolb7" value="b"> Think about what happened in detail (RO).</label>
+                    <label><input type="radio" name="kolb7" value="c"> Connect the error to the rule or principle (AC).</label>
+                    <label><input type="radio" name="kolb7" value="d"> Try new variations until I succeed (AE).</label>
+                </div>
+                <div class="question">
+                    <p>8. In a workshop, I’d be most excited by…</p>
+                    <label><input type="radio" name="kolb8" value="a" required> Direct activities and simulations (CE).</label>
+                    <label><input type="radio" name="kolb8" value="b"> Group reflections and sharing insights (RO).</label>
+                    <label><input type="radio" name="kolb8" value="c"> Abstract frameworks and models (AC).</label>
+                    <label><input type="radio" name="kolb8" value="d"> Experimenting and applying new methods (AE).</label>
+                </div>
+                <div class="question">
+                    <p>9. My favorite type of teacher is one who…</p>
+                    <label><input type="radio" name="kolb9" value="a" required> Gives me real-life experiences (CE).</label>
+                    <label><input type="radio" name="kolb9" value="b"> Encourages reflection and discussion (RO).</label>
+                    <label><input type="radio" name="kolb9" value="c"> Explains with clarity and logic (AC).</label>
+                    <label><input type="radio" name="kolb9" value="d"> Challenges me to apply knowledge in practice (AE).</label>
+                </div>
+                <div class="question">
+                    <p>10. Overall, I see myself as someone who learns mainly by…</p>
+                    <label><input type="radio" name="kolb10" value="a" required> Doing (CE).</label>
+                    <label><input type="radio" name="kolb10" value="b"> Watching and reflecting (RO).</label>
+                    <label><input type="radio" name="kolb10" value="c"> Thinking and conceptualizing (AC).</label>
+                    <label><input type="radio" name="kolb10" value="d"> Trying out and experimenting (AE).</label>
+                </div>
+            </div>
+
+            <div class="questionnaire">
+                <h2>🧠 Part 3: Self-Assessment Scales</h2>
+                <p>For the following statements, please rate yourself on a scale from 1 to 5.</p>
+
+                <div class="likert-labels">
+                    <span>1 = Strongly Disagree</span>
+                    <span>5 = Strongly Agree</span>
+                </div>
+
+                <h3>A. Metacognitive Awareness (MAI)</h3>
+                <div class="likert-question">
+                    <p>1. I am aware of my strengths and weaknesses as a learner.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="mai1" value="1" required></label>
+                        <label>2<input type="radio" name="mai1" value="2"></label>
+                        <label>3<input type="radio" name="mai1" value="3"></label>
+                        <label>4<input type="radio" name="mai1" value="4"></label>
+                        <label>5<input type="radio" name="mai1" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>2. I set goals before I begin studying.</p>
+                     <div class="likert-options">
+                        <label>1<input type="radio" name="mai2" value="1" required></label>
+                        <label>2<input type="radio" name="mai2" value="2"></label>
+                        <label>3<input type="radio" name="mai2" value="3"></label>
+                        <label>4<input type="radio" name="mai2" value="4"></label>
+                        <label>5<input type="radio" name="mai2" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>3. I ask myself questions to make sure I understand what I am learning.</p>
+                     <div class="likert-options">
+                        <label>1<input type="radio" name="mai3" value="1" required></label>
+                        <label>2<input type="radio" name="mai3" value="2"></label>
+                        <label>3<input type="radio" name="mai3" value="3"></label>
+                        <label>4<input type="radio" name="mai3" value="4"></label>
+                        <label>5<input type="radio" name="mai3" value="5"></label>
+                    </div>
+                </div>
+                 <div class="likert-question">
+                    <p>4. When I don’t understand something, I try different strategies to figure it out.</p>
+                     <div class="likert-options">
+                        <label>1<input type="radio" name="mai4" value="1" required></label>
+                        <label>2<input type="radio" name="mai4" value="2"></label>
+                        <label>3<input type="radio" name="mai4" value="3"></label>
+                        <label>4<input type="radio" name="mai4" value="4"></label>
+                        <label>5<input type="radio" name="mai4" value="5"></label>
+                    </div>
+                </div>
+                 <div class="likert-question">
+                    <p>5. I check my progress while I am studying.</p>
+                     <div class="likert-options">
+                        <label>1<input type="radio" name="mai5" value="1" required></label>
+                        <label>2<input type="radio" name="mai5" value="2"></label>
+                        <label>3<input type="radio" name="mai5" value="3"></label>
+                        <label>4<input type="radio" name="mai5" value="4"></label>
+                        <label>5<input type="radio" name="mai5" value="5"></label>
+                    </div>
+                </div>
+                 <div class="likert-question">
+                    <p>6. I know when to slow down my pace while learning difficult material.</p>
+                     <div class="likert-options">
+                        <label>1<input type="radio" name="mai6" value="1" required></label>
+                        <label>2<input type="radio" name="mai6" value="2"></label>
+                        <label>3<input type="radio" name="mai6" value="3"></label>
+                        <label>4<input type="radio" name="mai6" value="4"></label>
+                        <label>5<input type="radio" name="mai6" value="5"></label>
+                    </div>
+                </div>
+                 <div class="likert-question">
+                    <p>7. I evaluate how well I did after completing a task.</p>
+                     <div class="likert-options">
+                        <label>1<input type="radio" name="mai7" value="1" required></label>
+                        <label>2<input type="radio" name="mai7" value="2"></label>
+                        <label>3<input type="radio" name="mai7" value="3"></label>
+                        <label>4<input type="radio" name="mai7" value="4"></label>
+                        <label>5<input type="radio" name="mai7" value="5"></label>
+                    </div>
+                </div>
+                 <div class="likert-question">
+                    <p>8. I connect new information with what I already know.</p>
+                     <div class="likert-options">
+                        <label>1<input type="radio" name="mai8" value="1" required></label>
+                        <label>2<input type="radio" name="mai8" value="2"></label>
+                        <label>3<input type="radio" name="mai8" value="3"></label>
+                        <label>4<input type="radio" name="mai8" value="4"></label>
+                        <label>5<input type="radio" name="mai8" value="5"></label>
+                    </div>
+                </div>
+                 <div class="likert-question">
+                    <p>9. I am aware of which study strategies work best for me.</p>
+                     <div class="likert-options">
+                        <label>1<input type="radio" name="mai9" value="1" required></label>
+                        <label>2<input type="radio" name="mai9" value="2"></label>
+                        <label>3<input type="radio" name="mai9" value="3"></label>
+                        <label>4<input type="radio" name="mai9" value="4"></label>
+                        <label>5<input type="radio" name="mai9" value="5"></label>
+                    </div>
+                </div>
+                 <div class="likert-question">
+                    <p>10. I adjust my study methods when I find they are not working.</p>
+                     <div class="likert-options">
+                        <label>1<input type="radio" name="mai10" value="1" required></label>
+                        <label>2<input type="radio" name="mai10" value="2"></label>
+                        <label>3<input type="radio" name="mai10" value="3"></label>
+                        <label>4<input type="radio" name="mai10" value="4"></label>
+                        <label>5<input type="radio" name="mai10" value="5"></label>
+                    </div>
+                </div>
+
+
+                <h3 style="margin-top:2rem;">📚 B. Study Skills Inventory (SSI)</h3>
+                <div class="likert-question">
+                    <p>1. I keep a regular study schedule.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="ssi1" value="1" required></label>
+                        <label>2<input type="radio" name="ssi1" value="2"></label>
+                        <label>3<input type="radio" name="ssi1" value="3"></label>
+                        <label>4<input type="radio" name="ssi1" value="4"></label>
+                        <label>5<input type="radio" name="ssi1" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>2. I find it easy to concentrate while studying.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="ssi2" value="1" required></label>
+                        <label>2<input type="radio" name="ssi2" value="2"></label>
+                        <label>3<input type="radio" name="ssi2" value="3"></label>
+                        <label>4<input type="radio" name="ssi2" value="4"></label>
+                        <label>5<input type="radio" name="ssi2" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>3. I take organized notes during lectures or while reading.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="ssi3" value="1" required></label>
+                        <label>2<input type="radio" name="ssi3" value="2"></label>
+                        <label>3<input type="radio" name="ssi3" value="3"></label>
+                        <label>4<input type="radio" name="ssi3" value="4"></label>
+                        <label>5<input type="radio" name="ssi3" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>4. I review my notes soon after class.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="ssi4" value="1" required></label>
+                        <label>2<input type="radio" name="ssi4" value="2"></label>
+                        <label>3<input type="radio" name="ssi4" value="3"></label>
+                        <label>4<input type="radio" name="ssi4" value="4"></label>
+                        <label>5<input type="radio" name="ssi4" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>5. I prepare for exams well in advance, not at the last minute.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="ssi5" value="1" required></label>
+                        <label>2<input type="radio" name="ssi5" value="2"></label>
+                        <label>3<input type="radio" name="ssi5" value="3"></label>
+                        <label>4<input type="radio" name="ssi5" value="4"></label>
+                        <label>5<input type="radio" name="ssi5" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>6. I break down large assignments into smaller tasks.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="ssi6" value="1" required></label>
+                        <label>2<input type="radio" name="ssi6" value="2"></label>
+                        <label>3<input type="radio" name="ssi6" value="3"></label>
+                        <label>4<input type="radio" name="ssi6" value="4"></label>
+                        <label>5<input type="radio" name="ssi6" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>7. I use memory techniques (like acronyms, flashcards, or summaries).</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="ssi7" value="1" required></label>
+                        <label>2<input type="radio" name="ssi7" value="2"></label>
+                        <label>3<input type="radio" name="ssi7" value="3"></label>
+                        <label>4<input type="radio" name="ssi7" value="4"></label>
+                        <label>5<input type="radio" name="ssi7" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>8. I study in a space with minimal distractions.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="ssi8" value="1" required></label>
+                        <label>2<input type="radio" name="ssi8" value="2"></label>
+                        <label>3<input type="radio" name="ssi8" value="3"></label>
+                        <label>4<input type="radio" name="ssi8" value="4"></label>
+                        <label>5<input type="radio" name="ssi8" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>9. I use practice tests or self-quizzing to check my learning.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="ssi9" value="1" required></label>
+                        <label>2<input type="radio" name="ssi9" value="2"></label>
+                        <label>3<input type="radio" name="ssi9" value="3"></label>
+                        <label>4<input type="radio" name="ssi9" value="4"></label>
+                        <label>5<input type="radio" name="ssi9" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>10. I ask for help when I have difficulty understanding something.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="ssi10" value="1" required></label>
+                        <label>2<input type="radio" name="ssi10" value="2"></label>
+                        <label>3<input type="radio" name="ssi10" value="3"></label>
+                        <label>4<input type="radio" name="ssi10" value="4"></label>
+                        <label>5<input type="radio" name="ssi10" value="5"></label>
+                    </div>
+                </div>
+
+
+                <h3 style="margin-top:2rem;">💪 C. GRIT Scale</h3>
+                <div class="likert-question">
+                    <p>1. I finish whatever I begin.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="grit1" value="1" required></label>
+                        <label>2<input type="radio" name="grit1" value="2"></label>
+                        <label>3<input type="radio" name="grit1" value="3"></label>
+                        <label>4<input type="radio" name="grit1" value="4"></label>
+                        <label>5<input type="radio" name="grit1" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>2. Setbacks don’t discourage me for long.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="grit2" value="1" required></label>
+                        <label>2<input type="radio" name="grit2" value="2"></label>
+                        <label>3<input type="radio" name="grit2" value="3"></label>
+                        <label>4<input type="radio" name="grit2" value="4"></label>
+                        <label>5<input type="radio" name="grit2" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>3. I stick with projects even when they are very challenging.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="grit3" value="1" required></label>
+                        <label>2<input type="radio" name="grit3" value="2"></label>
+                        <label>3<input type="radio" name="grit3" value="3"></label>
+                        <label>4<input type="radio" name="grit3" value="4"></label>
+                        <label>5<input type="radio" name="grit3" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>4. I focus on long-term goals even if progress is slow.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="grit4" value="1" required></label>
+                        <label>2<input type="radio" name="grit4" value="2"></label>
+                        <label>3<input type="radio" name="grit4" value="3"></label>
+                        <label>4<input type="radio" name="grit4" value="4"></label>
+                        <label>5<input type="radio" name="grit4" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>5. I have overcome obstacles to achieve something important.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="grit5" value="1" required></label>
+                        <label>2<input type="radio" name="grit5" value="2"></label>
+                        <label>3<input type="radio" name="grit5" value="3"></label>
+                        <label>4<input type="radio" name="grit5" value="4"></label>
+                        <label>5<input type="radio" name="grit5" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>6. I don’t give up easily, even when things get tough.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="grit6" value="1" required></label>
+                        <label>2<input type="radio" name="grit6" value="2"></label>
+                        <label>3<input type="radio" name="grit6" value="3"></label>
+                        <label>4<input type="radio" name="grit6" value="4"></label>
+                        <label>5<input type="radio" name="grit6" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>7. I stay committed to goals over months or years.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="grit7" value="1" required></label>
+                        <label>2<input type="radio" name="grit7" value="2"></label>
+                        <label>3<input type="radio" name="grit7" value="3"></label>
+                        <label>4<input type="radio" name="grit7" value="4"></label>
+                        <label>5<input type="radio" name="grit7" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>8. I work hard for results that may not come immediately.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="grit8" value="1" required></label>
+                        <label>2<input type="radio" name="grit8" value="2"></label>
+                        <label>3<input type="radio" name="grit8" value="3"></label>
+                        <label>4<input type="radio" name="grit8" value="4"></label>
+                        <label>5<input type="radio" name="grit8" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>9. I keep improving at something even after initial success.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="grit9" value="1" required></label>
+                        <label>2<input type="radio" name="grit9" value="2"></label>
+                        <label>3<input type="radio" name="grit9" value="3"></label>
+                        <label>4<input type="radio" name="grit9" value="4"></label>
+                        <label>5<input type="radio" name="grit9" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>10. My effort is consistent, not just bursts of motivation.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="grit10" value="1" required></label>
+                        <label>2<input type="radio" name="grit10" value="2"></label>
+                        <label>3<input type="radio" name="grit10" value="3"></label>
+                        <label>4<input type="radio" name="grit10" value="4"></label>
+                        <label>5<input type="radio" name="grit10" value="5"></label>
+                    </div>
+                </div>
+
+
+                <h3 style="margin-top:2rem;">🎯 D. Motivated Strategies for Learning (MSLQ)</h3>
+                <div class="likert-question">
+                    <p>1. I am motivated to learn even when the material is difficult.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="mslq1" value="1" required></label>
+                        <label>2<input type="radio" name="mslq1" value="2"></label>
+                        <label>3<input type="radio" name="mslq1" value="3"></label>
+                        <label>4<input type="radio" name="mslq1" value="4"></label>
+                        <label>5<input type="radio" name="mslq1" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>2. I believe I can do well if I put in the effort.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="mslq2" value="1" required></label>
+                        <label>2<input type="radio" name="mslq2" value="2"></label>
+                        <label>3<input type="radio" name="mslq2" value="3"></label>
+                        <label>4<input type="radio" name="mslq2" value="4"></label>
+                        <label>5<input type="radio" name="mslq2" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>3. I set specific goals for my learning.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="mslq3" value="1" required></label>
+                        <label>2<input type="radio" name="mslq3" value="2"></label>
+                        <label>3<input type="radio" name="mslq3" value="3"></label>
+                        <label>4<input type="radio" name="mslq3" value="4"></label>
+                        <label>5<input type="radio" name="mslq3" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>4. I try to connect what I learn to real-life situations.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="mslq4" value="1" required></label>
+                        <label>2<input type="radio" name="mslq4" value="2"></label>
+                        <label>3<input type="radio" name="mslq4" value="3"></label>
+                        <label>4<input type="radio" name="mslq4" value="4"></label>
+                        <label>5<input type="radio" name="mslq4" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>5. I manage my study time effectively.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="mslq5" value="1" required></label>
+                        <label>2<input type="radio" name="mslq5" value="2"></label>
+                        <label>3<input type="radio" name="mslq5" value="3"></label>
+                        <label>4<input type="radio" name="mslq5" value="4"></label>
+                        <label>5<input type="radio" name="mslq5" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>6. I use different strategies depending on the subject or task.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="mslq6" value="1" required></label>
+                        <label>2<input type="radio" name="mslq6" value="2"></label>
+                        <label>3<input type="radio" name="mslq6" value="3"></label>
+                        <label>4<input type="radio" name="mslq6" value="4"></label>
+                        <label>5<input type="radio" name="mslq6" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>7. I monitor whether I am learning effectively while studying.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="mslq7" value="1" required></label>
+                        <label>2<input type="radio" name="mslq7" value="2"></label>
+                        <label>3<input type="radio" name="mslq7" value="3"></label>
+                        <label>4<input type="radio" name="mslq7" value="4"></label>
+                        <label>5<input type="radio" name="mslq7" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>8. I stay focused even when I don’t enjoy the topic.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="mslq8" value="1" required></label>
+                        <label>2<input type="radio" name="mslq8" value="2"></label>
+                        <label>3<input type="radio" name="mslq8" value="3"></label>
+                        <label>4<input type="radio" name="mslq8" value="4"></label>
+                        <label>5<input type="radio" name="mslq8" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>9. I try to find meaning in what I study, not just memorize it.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="mslq9" value="1" required></label>
+                        <label>2<input type="radio" name="mslq9" value="2"></label>
+                        <label>3<input type="radio" name="mslq9" value="3"></label>
+                        <label>4<input type="radio" name="mslq9" value="4"></label>
+                        <label>5<input type="radio" name="mslq9" value="5"></label>
+                    </div>
+                </div>
+                <div class="likert-question">
+                    <p>10. I reflect on my performance to improve future learning.</p>
+                    <div class="likert-options">
+                        <label>1<input type="radio" name="mslq10" value="1" required></label>
+                        <label>2<input type="radio" name="mslq10" value="2"></label>
+                        <label>3<input type="radio" name="mslq10" value="3"></label>
+                        <label>4<input type="radio" name="mslq10" value="4"></label>
+                        <label>5<input type="radio" name="mslq10" value="5"></label>
+                    </div>
+                </div>
+
+            </div>
+
+            <button type="submit">See My Results</button>
+        </form>
+
+        <div id="results" style="display:none;"></div>
+        
+        <div id="emailSection" style="display:none;">
+            <h2>📧 Email Your Results</h2>
+            <p>Enter your email address to send a copy of your results to your inbox.</p>
+            <input type="email" id="userEmail" placeholder="your.email@example.com">
+            <button id="sendEmailBtn">Send Email</button>
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById('assessmentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            if (!this.checkValidity()) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+            calculateResults();
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        function calculateResults() {
+            // --- VARK Calculation ---
+            const varkScores = { a: 0, b: 0, c: 0, d: 0 };
+            const varkMap = {
+                a: 'Visual',
+                b: 'Auditory',
+                c: 'Reading/Writing',
+                d: 'Kinesthetic'
+            };
+            for (let i = 1; i <= 10; i++) {
+                const choice = document.querySelector(`input[name="vark${i}"]:checked`).value;
+                varkScores[choice]++;
+            }
+
+            // --- Kolb Calculation ---
+            const kolbScores = { a: 0, b: 0, c: 0, d: 0 };
+            const kolbMap = {
+                a: 'Concrete Experience (CE)',
+                b: 'Reflective Observation (RO)',
+                c: 'Abstract Conceptualization (AC)',
+                d: 'Active Experimentation (AE)'
+            };
+            for (let i = 1; i <= 10; i++) {
+                const choice = document.querySelector(`input[name="kolb${i}"]:checked`).value;
+                kolbScores[choice]++;
+            }
+
+            // --- Likert Scales Calculation ---
+            const calculateLikertScore = (prefix) => {
+                let total = 0;
+                for (let i = 1; i <= 10; i++) {
+                    total += parseInt(document.querySelector(`input[name="${prefix}${i}"]:checked`).value);
+                }
+                return total;
+            };
+
+            const maiScore = calculateLikertScore('mai');
+            const ssiScore = calculateLikertScore('ssi');
+            const gritScore = calculateLikertScore('grit');
+            const mslqScore = calculateLikertScore('mslq');
+
+            // --- Display Results ---
+            displayResults({ varkScores, varkMap, kolbScores, kolbMap, maiScore, ssiScore, gritScore, mslqScore });
+        }
+        
+        function getLikertInterpretation(score) {
+            if (score >= 30) return '<strong>Strong</strong>: This is a key strength in your learning approach.';
+            if (score >= 20) return '<strong>Moderate</strong>: You have a good foundation, but there is room to grow here.';
+            return '<strong>Needs Attention</strong>: This is an area where you could focus on development.';
+        }
+
+        function displayResults(data) {
+            const { varkScores, varkMap, kolbScores, kolbMap, maiScore, ssiScore, gritScore, mslqScore } = data;
+            const resultsDiv = document.getElementById('results');
+
+            let varkHtml = '<h3>🎨 VARK Preferences</h3><ul>';
+            Object.keys(varkScores).forEach(key => {
+                varkHtml += `<li>${varkMap[key]}: <span class="score">${varkScores[key]}</span></li>`;
+            });
+            varkHtml += '</ul><p>Your dominant preference is the mode with the highest score. If scores are close, you are a flexible, multimodal learner.</p>';
+            
+            let kolbHtml = '<h3>🔄 Kolb Learning Cycle Tendencies</h3><ul>';
+            Object.keys(kolbScores).forEach(key => {
+                kolbHtml += `<li>${kolbMap[key]}: <span class="score">${kolbScores[key]}</span></li>`;
+            });
+            kolbHtml += '</ul><p>Your strongest tendency is your primary way of engaging in the learning cycle. Balanced scores mean you move easily through all four stages.</p>';
+
+            let likertHtml = `
+                <h3>🧠 Self-Assessment Scale Results</h3>
+                <ul>
+                    <li>Metacognitive Awareness (MAI): <span class="score">${maiScore}</span> / 50<br><em>${getLikertInterpretation(maiScore)}</em></li>
+                    <li>Study Skills Inventory (SSI): <span class="score">${ssiScore}</span> / 50<br><em>${getLikertInterpretation(ssiScore)}</em></li>
+                    <li>GRIT Scale: <span class="score">${gritScore}</span> / 50<br><em>${getLikertInterpretation(gritScore)}</em></li>
+                    <li>Motivated Strategies for Learning (MSLQ): <span class="score">${mslqScore}</span> / 50<br><em>${getLikertInterpretation(mslqScore)}</em></li>
+                </ul>`;
+
+            let reflectionHtml = `
+                <h3>🌱 Personal Reflection Prompts</h3>
+                <ul>
+                    <li>Which areas were my strongest and weakest? How does this align with my experience as a learner?</li>
+                    <li>Which part of Kolb’s cycle (Doing, Reflecting, Thinking, Experimenting) do I often skip?</li>
+                    <li>Do I avoid certain VARK modes (e.g., drawing diagrams or reading texts)? How could I incorporate them more?</li>
+                    <li>What is one small, practical change I can make this week to improve in my lowest-scoring area?</li>
+                </ul>`;
+
+            resultsDiv.innerHTML = `
+                <h2>Your Assessment Results</h2>
+                <div class="result-block">${varkHtml}</div>
+                <div class="result-block">${kolbHtml}</div>
+                <div class="result-block">${likertHtml}</div>
+                <div class="result-block">${reflectionHtml}</div>
+            `;
+            
+            resultsDiv.style.display = 'block';
+            document.getElementById('emailSection').style.display = 'block';
+        }
+        
+        document.getElementById('sendEmailBtn').addEventListener('click', function() {
+            const email = document.getElementById('userEmail').value;
+            if (!email) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            const resultsDiv = document.getElementById('results');
+            const subject = "My Learning Skills Assessment Results";
+            
+            // Use innerText to get a clean text representation for the email body
+            const body = resultsDiv.innerText; 
+            
+            const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            window.location.href = mailtoLink;
+        });
+
+    </script>
+
+</body>
+</html>
